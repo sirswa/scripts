@@ -1,0 +1,36 @@
+#!/bin/sh
+#This script to be run at desktop which has direct connection to database server, or database server itself
+
+#Set datebase credential. I prefer to keep it in separate file for more secure approach.
+#I set mine on secure folder
+#FILE=/Users/saung/data/NeCTAR/credentials/nova.cnf
+
+#Set your mysql client path
+#CMD="/usr/local/bin/mysql --defaults-file=$FILE -e"
+CMD="/usr/local/bin/mysql -e"
+
+#Set your database name
+DB=nova_monash_01
+
+case $1 in
+	project* | tenant* )	
+		$CMD "use $DB; select @rownum:=@rownum+1 'No', created_at,uuid,project_id,image_ref,vm_state,vcpus from instances, (SELECT @rownum:=0) r where deleted_at is NULL order by project_id,image_ref";;	
+		
+	user* )	
+		$CMD "use $DB; select @rownum:=@rownum+1 'No', created_at,uuid,user_id,project_id,host,vcpus,vm_state from instances, (SELECT @rownum:=0) r where deleted_at is NULL order by user_id,project_id,vcpus";;	
+	image )	
+		$CMD "use $DB; select @rownum:=@rownum+1 'No', created_at,uuid,image_ref,user_id,project_id,vm_state from instances, (SELECT @rownum:=0) r where deleted_at is NULL order by image_ref,project_id,user_id";;	
+
+	*-* )	
+		$CMD "use $DB; select * from instances where uuid = '$1'\G";;	
+	
+	118.* )	
+		 $CMD "use $DB;select * from instances where uuid = (select instance_uuid from fixed_ips where address = '$1' and deleted_at IS NULL)\G";;	
+	host*)	
+		$CMD "use $DB; select @rownum:=@rownum+1 'No', created_at,uuid,user_id,project_id,host,vcpus,vm_state,task_state from instances, (SELECT @rownum:=0) r where deleted_at is NULL order by host,vcpus,created_at";;	
+	*)	
+		$CMD "use $DB; select count(DISTINCT user_id) AS Users, sum(vcpus) AS CPUs, count(DISTINCT project_id) AS Projects, count(uuid) AS Instances, count(DISTINCT host) AS Hypervisors, min(created_at) AS 'Oldest Inst(UTC)', max(created_at) AS 'Newest Inst(UTC)' from instances where deleted_at is NULL AND vm_state  <> 'error'";
+		echo "Options:
+	running-inst host|project|user|image|<instance_id>|<instance_ip>";
+		echo " ";;	
+esac
