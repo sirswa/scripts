@@ -1,0 +1,14 @@
+
+# MacPorts Installer addition on 2013-05-17_at_19:54:46: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+## set env
+SC=$HOME/scripts
+WORKDIR=$HOME/workspace
+export PATH=$PATH:$SC:$WORKDIR
+
+##refresh ssh config file
+sh $HOME/.ssh/refresh
