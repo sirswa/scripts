@@ -1,0 +1,10 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	        . /etc/bashrc
+	fi
+
+	# User specific aliases and functions
+	alias screen='ln -sf $SSH_AUTH_SOCK $HOME/.ssh-auth-sock; env SSH_AUTH_SOCK=$HOME/.ssh-auth-sock screen'
+	cat ~/.ssh/*.config > ~/.ssh/config
