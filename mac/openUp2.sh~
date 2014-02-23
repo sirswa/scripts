@@ -1,0 +1,2 @@
+#!/bin/basg
+open -n /Applications/KeePassX.app $HOME/Dropbox/work.kdb &
