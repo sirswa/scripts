@@ -1,0 +1,1 @@
+sudo networksetup -setdnsservers Wi-Fi 203.12.160.35 203.12.160.36

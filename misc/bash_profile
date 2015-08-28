@@ -25,3 +25,6 @@ if [ -f "${SSH_ENV}" ]; then
 else
 	start_agent;
 fi
+
+HISTFILESIZE=1000000000
+HISTSIZE=1000000

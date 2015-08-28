@@ -15,7 +15,7 @@ progress 2
 
 echo -e "\nRestarting libvirt-bin       \c"
 progress 5
-/sbin/restart libvirt-bin 
+stop libvirt-bin;start libvirt-bin
 
 echo -e "\nRestarting nova-network      \c"
 progress 5

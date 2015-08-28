@@ -4,6 +4,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+#export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 ## set env
 SC=$HOME/scripts

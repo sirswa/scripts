@@ -1,0 +1,1 @@
+ssh -L 9810:rcmq02-01-1g.erc.monash.edu.au:15672 -L 9811:rcmq02-02-1g.erc.monash.edu.au:15672 -L 9812:rcmq02-03-1g.erc.monash.edu.au:15672 -L 9710:118.138.240.74:15672 -L 9711:118.138.240.75:15672 -L 9610:rcnagiosvs1-001.erc.monash.edu.au:80 -L 9611:rcganglia-001.erc.monash.edu.au:80 -L 9612:rcganglia02-01-1g.erc.monash.edu.au:80 sg2.its.monash.edu.au
